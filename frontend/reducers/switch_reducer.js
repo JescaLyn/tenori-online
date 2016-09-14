@@ -24,6 +24,7 @@ const SwitchReducer = (state = defaultState, action) => {
 
       return newState;
     case SwitchConstants.CLEAR_SWITCHES:
+      $('.switch').removeClass("lit");
       return defaultState;
     default:
       return state;

@@ -18,6 +18,7 @@ class Controls extends React.Component {
     if (!this.timer) {
       this.timer = window.setInterval(this.props.changeColumn,
         this.props.speed);
+      this.props.startPlayback();
     }
   }
 
@@ -25,6 +26,7 @@ class Controls extends React.Component {
     if (this.timer) {
       window.clearInterval(this.timer);
       this.timer = null;
+      this.props.stopPlayback();
     }
   }
 

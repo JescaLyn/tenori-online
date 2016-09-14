@@ -35,6 +35,12 @@ class SwitchCol extends React.Component {
     });
   }
 
+  stopNotes() {
+    this.notes.forEach((note, index) => {
+      note.stop();
+    });
+  }
+
   render() {
     const switches = [];
     for (let i = 0; i < 16; i++) {
@@ -46,7 +52,9 @@ class SwitchCol extends React.Component {
       />);
     }
 
-    if (this.props.column === this.props.id) {
+    if (this.props.stopped) {
+      this.stopNotes();
+    } else if (this.props.column === this.props.id) {
       this.play();
     } else if (this.props.column === ((this.props.id + 1) % 16)) {
       this.stop();

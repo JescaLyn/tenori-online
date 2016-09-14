@@ -51,19 +51,32 @@ h1 {
 
 .footer {
   width: 480px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
 }
 
 .button {
   display: flex;
-  background: #aaa;
+  padding: 10px 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 0px 5px;
+}
+
+.button:hover {
+  background:
 }
 
 .controls {
-
+  display: flex;
 }
 
 .links {
+ padding: 10px 20px;
+}
 
+.links a {
+  color: #0192B5;
+  margin-left: 10px;
 }

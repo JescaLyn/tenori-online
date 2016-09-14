@@ -6,7 +6,8 @@ const mapStateToProps = (state, ownProps) => ({
   id: ownProps.id,
   column: state.column,
   litSwitches: state.litSwitches[ownProps.id],
-  volume: state.volume
+  volume: state.volume,
+  stopped: state.stopped
 });
 
 const mapDispatchToProps = dispatch => ({
