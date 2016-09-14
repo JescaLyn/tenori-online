@@ -34112,12 +34112,12 @@
 	    { className: "links" },
 	    _react2.default.createElement(
 	      "a",
-	      { href: "www.github.com/JescaLyn" },
+	      { href: "http://www.github.com/JescaLyn" },
 	      "Github"
 	    ),
 	    _react2.default.createElement(
 	      "a",
-	      { href: "www.linkedin.com/in/JescaTerry" },
+	      { href: "http://www.linkedin.com/in/JescaTerry" },
 	      "LinkedIn"
 	    )
 	  );
