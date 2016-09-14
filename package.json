@@ -4,7 +4,8 @@
   "description": "### Background",
   "main": "index.js",
   "scripts": {
-    "postinstall": "./node_modules/.bin/webpack"
+    "postinstall": "./node_modules/.bin/webpack",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
