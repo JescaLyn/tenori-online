@@ -4,8 +4,8 @@
   "description": "### Background",
   "main": "index.js",
   "scripts": {
-    "postinstall": "./node_modules/.bin/webpack",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
   },
   "repository": {
     "type": "git",
