@@ -1,88 +1,140 @@
 ## Tenori-Online
 
+Tenori-Online is a musical web application that provides a simple interface for developing melodies.
+
+[Tenori-Online Live][url]
+[url]: http://www.jessica-terry.com/tenori-online/
+
 ### Background
 
-The Tenori-on is a musical device composed of a 16 x 16 grid, each row of which represents a particular sound, and each column of which represents the timing of a beat. A user may toggle any of the note switches, and the device will play the notes from left to right in a steady, repeated rhythm. A dial allows the user to change the speed of the playback.
+The Tenori-on is a musical device composed of a 16 x 16 grid, each row of which represents a particular note, and each column of which represents the timing of a beat. A user may toggle any of the note switches, and the device will play the notes from left to right in a steady, repeated rhythm. A dial allows the user to change the speed of the playback.
 
 This project is a Javascript-based version of the Tenori-on as outlined below.
 
-### Functionality & MVP  
+### Features
+* Customizable melody with 16 different notes
+  * Notes are programmatically generated using `window.AudioContext`
+* Intuitive UI for manipulating playback
+  * Sliders to adjust playback volume and tempo
+  * Buttons to start and stop playback or clear the board
+* Included Demo Song
+  * "Twinkle Twinkle Little Star" on Tenori-Online
+  * Helpful visualization of the device's capabilities
 
-With Tenori-Online, users will be able to:
+### Demo
 
-- [ ] Start and pause playback
-- [ ] Toggle note switches on or off, or clear the board of notes
-- [ ] Play a demo song to demonstrate the board's capabilities
-- [ ] Use a slider to control the speed of playback
+![Demo][http://g.recordit.co/tTtHZmxUDk.gif]
 
-In addition, this project will include:
+### Code Snips
 
-- [ ] An Instructions modal describing the how to operate the Tenori-Online
-- [ ] A production Readme
+Tenori-Online was constructed in JavaScript using React + Redux, jQuery, HTML5, and CSS3.
 
-### Wireframes
+To handle the tempo and allow for it to be adjusted, I utilized JS's `window.setInterval` and `window.clearInterval`.
 
-This app will consist of a single page with a 16 x 16 switch grid, a slider to control the speed of playback, controls to start and stop playback or clear the board, and links to my Github, LinkedIn, and the instructions.
+```js
+class Controls extends React.Component {
+  constructor(props) {
+    super(props);
+    this.startInterval = this.startInterval.bind(this);
+    this.stopInterval = this.stopInterval.bind(this);
+    this.changeColumn = this.changeColumn.bind(this);
+    this.timer = window.setInterval(this.props.changeColumn, this.props.speed);
+  }
 
-![wireframes](wireframe.png)
+  changeColumn() {
+    window.clearInterval(this.timer);
+    this.timer = window.setInterval(this.props.changeColumn, this.props.speed);
+  }
 
-### Architecture and Technologies
+  startInterval() {
+    if (!this.timer) {
+      this.timer = window.setInterval(this.props.changeColumn,
+        this.props.speed);
+      this.props.startPlayback();
+    }
+  }
 
-This project will be implemented with the following technologies:
+  stopInterval() {
+    if (this.timer) {
+      window.clearInterval(this.timer);
+      this.timer = null;
+      this.props.stopPlayback();
+    }
+  }
+}
 
-- Javascript and jQuery for structure and game logic
-- React and Redux for DOM manipulation and frontend components
-- Webpack to bundle scripts into one file
-- `Sound.js` for notes, or `note.js` with simple HTML5 oscillator
+```
 
-There will be several scripts in this project:
+The notes are programmatically generated, and their volume is adjusted in their `start` function.
 
-`switchboard.js`: this script will hold the `Switchboard` class and keep track of playback speed.
+```js
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-`switch.js`: this script will hold the `Switch` class that can be toggled on or off and has a play function that produces the appropriate sound.
+const createOscillator = (freq) => {
+  const osc = ctx.createOscillator();
+  osc.type = "sine";
+  osc.frequency.value = freq;
+  osc.detune.value = 0;
+  osc.start(ctx.currentTime);
+  return osc;
+};
 
-`note.js`: this script will use for the basic note creation until I incorporate `Sound.js`
+const createGainNode = () => {
+  const gainNode = ctx.createGain();
+  gainNode.gain.value = 0;
+  gainNode.connect(ctx.destination);
+  return gainNode;
+};
 
-The following components will also be needed:
+class Note {
+  constructor(freq) {
+    this.oscillatorNode = createOscillator(freq);
+    this.gainNode = createGainNode();
+    this.oscillatorNode.connect(this.gainNode);
+  }
 
-`tenori-online`: the master component that will render into the DOM.
+  start(vol) {
+    this.gainNode.gain.value = vol;
+  }
 
-`switchboard.jsx`: this component will render the containing grid.
+  stop() {
+    this.gainNode.gain.value = 0;
+  }
+}
+```
 
-`switch.jsx`: this component will render one switch, toggling between lit, unlit, and played color schemes.
+jQuery is used in conjunction with React and Redux reducers to simply toggle classes for the CSS presentation.
 
+```js
+const SwitchReducer = (state = defaultState, action) => {
+  let newState = merge({}, state);
 
-### Implementation Timeline
+  switch (action.type) {
+    case SwitchConstants.TOGGLE_SWITCH:
+      const col = action.columnId;
 
-**Day 1**: Setup all necessary Node modules, including getting webpack up and running.  Create `webpack.config.js` as well as `package.json`.  Outline all Javascript classes and components. Setup component structure. Goals for the day:
+      if (newState[col].includes(action.switchId)) {
+        newState[col].splice(newState[col].indexOf(action.switchId), 1);
+        $(`.${action.columnId}-${action.switchId}`).removeClass("lit");
+      } else {
+        newState[col].push(action.switchId);
+        $(`.${action.columnId}-${action.switchId}`).addClass("lit");
+      }
 
-- Get a green bundle with `webpack`
-- Research `Sound.js` to see if that will give me better notes than the `note.js` HTML5 oscillator
+      return newState;
+    case SwitchConstants.CLEAR_SWITCHES:
+      $('.switch').removeClass("lit");
+      return defaultState;
+    default:
+      return state;
+  }
+};
+```
 
-**Day 2**: Build the frontend components. Render a `Switchboard` to the screen, with 16 x 16 `Switch`es. Build in functionality to toggle switches on and off by clicking. Style in a presentable way. Goals for the day:
+### Future Directions
 
-- Complete the `switchboard.jsx` component
-- Complete the `switch.jsx` component
-- Render Switchboard and Switches to screen
-- Make each switch clickable, toggling the color
+I would like to develop the following features for this app.
 
-**Day 3**: Build out the backend. Write the `Switchboard` class logic, and the `Switch` class logic. At least implement the `note.js` file for notes. Ideally, use `Sound.js` to create different sounds. Develop the playback logic. Implement a simple demo song to demonstrate playback. Goals for the day:
-
-- Complete the `switchboard.js` and `switch.js` classes
-- Produce notes from switches toggled on
-- Establish playback at a set speed
-- Develop simple demo song
-
-**Day 4**: Develop the controls for the user to set playback. Style these controls with a comfortable user interface. Goals for the day:
-
-- Install controls for playback start and stop and clearing the switchboard.
-- Install a slider to control playback speed smoothly.
-- Style these elements and polish the entire app appearance.
-
-### Bonus features
-
-If I have time, I would like to develop the following features.
-
-- [ ] The user may, in addition to just clicking on a switch, drag their selection to toggle many switches.
-- [ ] The switchboard has interesting visual effects during playback.
-- [ ] The user can select between different sets of sounds, whether that is higher or lower keys or different sounds entirely.
+* The user may, in addition to just clicking on a switch, drag their selection to toggle many switches.
+* The switchboard has interesting visual effects during playback.
+* The user can select between different sets of sounds, whether that is higher or lower keys or different sounds entirely.

@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Quattrocento Sans', sans-serif;
   background: black;
   color: white;
 }
@@ -41,12 +41,12 @@ h1 {
 }
 
 .sliders {
-  width: 400px;
+  width: 460px;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
   margin-top: 30px;
-  margin-bottom: 10px
+  margin-bottom: 20px;
 }
 
 .footer {
@@ -65,7 +65,7 @@ h1 {
 }
 
 .button:hover {
-  background:
+  background: #909090;
 }
 
 .controls {
@@ -79,4 +79,29 @@ h1 {
 .links a {
   color: #0192B5;
   margin-left: 10px;
+}
+
+.instructions-modal {
+  width: 400px;
+  margin: 0 auto;
+  top: 70px;
+  background-image: radial-gradient(circle at 200px, aliceblue 40%, #d2f7ff 100%);
+  color: black;
+  padding: 30px 40px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #e56149;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 7px;
+}
+
+.closeButton:hover {
+  background: #ff856f;
 }
