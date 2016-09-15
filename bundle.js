@@ -58,7 +58,7 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _store = __webpack_require__(218);
+	var _store = __webpack_require__(219);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -21502,7 +21502,7 @@
 	
 	var _controls_container2 = _interopRequireDefault(_controls_container);
 	
-	var _links = __webpack_require__(217);
+	var _links = __webpack_require__(218);
 	
 	var _links2 = _interopRequireDefault(_links);
 	
@@ -23309,7 +23309,7 @@
 	
 	    _this.notes = [];
 	    for (var i = 0; i < 16; i++) {
-	      _this.notes.push(new _note2.default(_tones.TONES[i]));
+	      _this.notes.unshift(new _note2.default(_tones.TONES[i]));
 	    }
 	    return _this;
 	  }
@@ -33961,7 +33961,7 @@
 	
 	var _column_actions = __webpack_require__(207);
 	
-	var _stopped_actions = __webpack_require__(227);
+	var _stopped_actions = __webpack_require__(217);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -34092,6 +34092,32 @@
 
 /***/ },
 /* 217 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var StoppedConstants = exports.StoppedConstants = {
+	  STOP_PLAYBACK: "STOP_PLAYBACK",
+	  START_PLAYBACK: "START_PLAYBACK"
+	};
+	
+	var stopPlayback = exports.stopPlayback = function stopPlayback() {
+	  return {
+	    type: StoppedConstants.STOP_PLAYBACK
+	  };
+	};
+	
+	var startPlayback = exports.startPlayback = function startPlayback() {
+	  return {
+	    type: StoppedConstants.START_PLAYBACK
+	  };
+	};
+
+/***/ },
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34126,7 +34152,7 @@
 	exports.default = Links;
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34138,7 +34164,7 @@
 	
 	var _redux = __webpack_require__(182);
 	
-	var _root_reducer = __webpack_require__(219);
+	var _root_reducer = __webpack_require__(220);
 	
 	var _root_reducer2 = _interopRequireDefault(_root_reducer);
 	
@@ -34149,7 +34175,7 @@
 	}
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34158,23 +34184,23 @@
 	  value: true
 	});
 	
-	var _switch_reducer = __webpack_require__(220);
+	var _switch_reducer = __webpack_require__(221);
 	
 	var _switch_reducer2 = _interopRequireDefault(_switch_reducer);
 	
-	var _column_reducer = __webpack_require__(223);
+	var _column_reducer = __webpack_require__(224);
 	
 	var _column_reducer2 = _interopRequireDefault(_column_reducer);
 	
-	var _volume_reducer = __webpack_require__(224);
+	var _volume_reducer = __webpack_require__(225);
 	
 	var _volume_reducer2 = _interopRequireDefault(_volume_reducer);
 	
-	var _speed_reducer = __webpack_require__(225);
+	var _speed_reducer = __webpack_require__(226);
 	
 	var _speed_reducer2 = _interopRequireDefault(_speed_reducer);
 	
-	var _stopped_reducer = __webpack_require__(226);
+	var _stopped_reducer = __webpack_require__(227);
 	
 	var _stopped_reducer2 = _interopRequireDefault(_stopped_reducer);
 	
@@ -34193,7 +34219,7 @@
 	exports.default = RootReducer;
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34204,7 +34230,7 @@
 	
 	var _switch_actions = __webpack_require__(206);
 	
-	var _lodash = __webpack_require__(221);
+	var _lodash = __webpack_require__(222);
 	
 	var _jquery = __webpack_require__(205);
 	
@@ -34247,7 +34273,7 @@
 	exports.default = SwitchReducer;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -50984,10 +51010,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(222)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(223)(module)))
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -51003,7 +51029,7 @@
 
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51029,7 +51055,7 @@
 	exports.default = ColumnReducer;
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51055,7 +51081,7 @@
 	exports.default = VolumeReducer;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51081,7 +51107,7 @@
 	exports.default = SpeedReducer;
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -51090,7 +51116,7 @@
 	  value: true
 	});
 	
-	var _stopped_actions = __webpack_require__(227);
+	var _stopped_actions = __webpack_require__(217);
 	
 	var StoppedReducer = function StoppedReducer() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
@@ -51107,32 +51133,6 @@
 	};
 	
 	exports.default = StoppedReducer;
-
-/***/ },
-/* 227 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var StoppedConstants = exports.StoppedConstants = {
-	  STOP_PLAYBACK: "STOP_PLAYBACK",
-	  START_PLAYBACK: "START_PLAYBACK"
-	};
-	
-	var stopPlayback = exports.stopPlayback = function stopPlayback() {
-	  return {
-	    type: StoppedConstants.STOP_PLAYBACK
-	  };
-	};
-	
-	var startPlayback = exports.startPlayback = function startPlayback() {
-	  return {
-	    type: StoppedConstants.START_PLAYBACK
-	  };
-	};
 
 /***/ }
 /******/ ]);

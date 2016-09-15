@@ -9,7 +9,7 @@ class SwitchCol extends React.Component {
     super(props);
     this.notes = [];
     for (let i = 0; i < 16; i++) {
-      this.notes.push(new Note(TONES[i]));
+      this.notes.unshift(new Note(TONES[i]));
     }
   }
 
