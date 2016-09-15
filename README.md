@@ -23,7 +23,7 @@ This project is a Javascript-based version of the Tenori-on as outlined below.
 
 ### Demo
 
-![Demo][http://g.recordit.co/tTtHZmxUDk.gif]
+![Demo gif](http://g.recordit.co/tTtHZmxUDk.gif)
 
 ### Code Snips
 
@@ -103,7 +103,7 @@ class Note {
 }
 ```
 
-jQuery is used in conjunction with React and Redux reducers to simply toggle classes for the CSS presentation.
+jQuery is used in conjunction Redux reducers to simply toggle classes for CSS presentation.
 
 ```js
 const SwitchReducer = (state = defaultState, action) => {
