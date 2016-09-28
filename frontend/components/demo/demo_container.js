@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Demo from './demo';
-import { toggleSwitch } from '../../actions/switch_actions';
+import { toggleSwitch, clearSwitches } from '../../actions/switch_actions';
 import { changeSpeed } from '../../actions/speed_actions';
 
 const mapStateToProps = state => ({
