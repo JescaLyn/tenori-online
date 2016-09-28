@@ -34046,19 +34046,9 @@
 	    changeSpeed: function changeSpeed(speed) {
 	      return dispatch((0, _speed_actions.changeSpeed)(speed));
 	    },
-	    clearSwitches: function (_clearSwitches) {
-	      function clearSwitches() {
-	        return _clearSwitches.apply(this, arguments);
-	      }
-	
-	      clearSwitches.toString = function () {
-	        return _clearSwitches.toString();
-	      };
-	
-	      return clearSwitches;
-	    }(function () {
-	      return dispatch(clearSwitches());
-	    })
+	    clearSwitches: function clearSwitches() {
+	      return dispatch((0, _switch_actions.clearSwitches)());
+	    }
 	  };
 	};
 	
