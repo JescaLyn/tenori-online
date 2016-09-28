@@ -19,6 +19,7 @@ const SWITCHES = [
 
 class Demo extends React.Component {
   startDemo() {
+    this.props.clearSwitches();
     this.props.changeSpeed(281);
     SWITCHES.forEach((args, index) => {
       window.setTimeout(() => {

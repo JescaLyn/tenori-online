@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   toggleSwitch: (colId, switchId) => dispatch(toggleSwitch(colId, switchId)),
-  changeSpeed: speed => dispatch(changeSpeed(speed))
+  changeSpeed: speed => dispatch(changeSpeed(speed)),
+  clearSwitches: () => dispatch(clearSwitches())
 });
 
 export default connect(
